@@ -1,0 +1,21 @@
+---
+# tasks file for Registry
+
+- name: Change hostname
+  hostname:
+    name: DOCKER-REGISTRY
+
+- name: Download registry repository
+  git:
+    repo: 'https://github.com/Projet-Automation-Infra-SI-Ynov/Registry.git'
+    dest: '{{ PATH }}'
+    version: develop
+
+- name: Deploy Docker Compose registry
+  docker_compose:
+    build: yes
+    project_src: /home/administrateur/registry
+    state: present
+
+# - name: Start registry image
+#   shell: docker-compose -f '{{ PATH }}'/docker-compose.yml up -d
