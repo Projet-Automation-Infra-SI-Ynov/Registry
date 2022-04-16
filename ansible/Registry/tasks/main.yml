@@ -11,11 +11,25 @@
     dest: '{{ PATH }}'
     version: develop
 
+- name: Add Registry IP in daemon.json
+  shell: sed -i 's/IP_REGISTRY/REGISTRY2/g' /home/administrateur/registry/daemon.json
+
 - name: Deploy Docker Compose registry
   docker_compose:
     build: yes
     project_src: /home/administrateur/registry
     state: present
 
-# - name: Start registry image
-#   shell: docker-compose -f '{{ PATH }}'/docker-compose.yml up -d
+- name: Copy the Docker daemon file
+  copy:
+    remote_src: yes
+    src: /home/administrateur/registry/daemon.json
+    dest: /etc/docker/daemon.json
+
+- name: Restart the Docker daemon
+  systemd:
+    name: docker
+    state: restarted
+    masked: no
+  #timeout: 60
+  async: 60
