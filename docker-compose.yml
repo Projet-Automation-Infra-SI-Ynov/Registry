@@ -10,16 +10,16 @@ services:
       - docker-registry
     restart: always
 
-  # docker-registry-host-web-ui:
-  #   image: konradkleine/docker-registry-frontend:v2
-  #   environment:
-  #     ENV_DOCKER_REGISTRY_HOST: 192.168.10.15
-  #     ENV_DOCKER_REGISTRY_PORT: 5000
-  #   ports:
-  #     - 8080:80
-  #   networks:
-  #     - docker-registry
-  #   restart: always
+  docker-registry-host-web-ui:
+    image: konradkleine/docker-registry-frontend:v2
+    environment:
+      ENV_DOCKER_REGISTRY_HOST: IP_REGISTRY
+      ENV_DOCKER_REGISTRY_PORT: 5000
+    ports:
+      - 8080:80
+    networks:
+      - docker-registry
+    restart: always
 
 networks:
   docker-registry:
