@@ -5,6 +5,12 @@
   hostname:
     name: DOCKER-REGISTRY
 
+- name: Download apache2-utils
+  apt:
+    name: apache2-utils
+    state: latest
+    update_cache: yes
+
 - name: Download registry repository
   git:
     repo: 'https://github.com/Projet-Automation-Infra-SI-Ynov/Registry.git'
