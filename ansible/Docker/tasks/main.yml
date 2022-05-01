@@ -74,9 +74,11 @@
         docker_compose_current_version is not defined
         or docker_compose_current_version is version(docker_compose_version, '<')
 
-- name: Install pip3 with python3
+- name: Install pip3 with python3 & sshpass
   apt:
-    name: python3-pip
+    name: 
+      - python3-pip
+      - sshpass
     state: present
     update_cache: yes
 
