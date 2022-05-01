@@ -20,6 +20,9 @@
 - name: Add Registry IP in daemon.json
   shell: sed -i 's/IP_REGISTRY/REGISTRY2/g' /home/administrateur/registry/daemon.json
 
+- name: Add Registry IP in daemon.json
+  shell: sed -i 's/IP_REGISTRY/REGISTRY2/g' /home/administrateur/registry/docker-compose.yml
+
 - name: Deploy Docker Compose registry
   docker_compose:
     build: yes
