@@ -8,9 +8,9 @@ services:
       REGISTRY_AUTH: htpasswd
       REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
       REGISTRY_AUTH_HTPASSWD_PATH: /auth/registry.password
-      REGISTRY_HTTP_DEBUG_ADDR: IP_REGISTRY:5001
-      REGISTRY_HTTP_DEBUG_PROMETHEUS_ENABLED: "true"
-      REGISTRY_HTTP_DEBUG_PROMETHEUS_PATH: /metrics
+      # REGISTRY_HTTP_DEBUG_ADDR: IP_REGISTRY:5001
+      # REGISTRY_HTTP_DEBUG_PROMETHEUS_ENABLED: "true"
+      # REGISTRY_HTTP_DEBUG_PROMETHEUS_PATH: /metrics
     volumes:
       - ./registry-data:/var/lib/registry
       - ./auth:/auth
