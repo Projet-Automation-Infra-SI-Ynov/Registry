@@ -1,7 +1,8 @@
 version: "3.7"
 services:
-  docker-registry-host:
+  registry:
     image: registry:2.8.1
+    container_name: registry
     ports:
       - 5000:5000
     environment:
@@ -18,8 +19,9 @@ services:
       - docker-registry
     restart: always
 
-  docker-registry-host-web-ui:
+  registry-ui:
     image: konradkleine/docker-registry-frontend:v2
+    container_name: registry-ui
     environment:
       ENV_DOCKER_REGISTRY_HOST: IP_REGISTRY
       ENV_DOCKER_REGISTRY_PORT: 5000
