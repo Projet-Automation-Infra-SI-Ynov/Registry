@@ -15,7 +15,7 @@
   git:
     repo: 'https://github.com/Projet-Automation-Infra-SI-Ynov/Registry.git'
     dest: '{{ PATH }}'
-    version: develop
+    version: master
 
 - name: Add Registry IP in daemon.json
   shell: sed -i 's/IP_REGISTRY/REGISTRY2/g' /home/administrateur/registry/daemon.json
