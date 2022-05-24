@@ -1,0 +1,44 @@
+---
+# tasks file for Registry
+
+- name: Change hostname
+  hostname:
+    name: DOCKER-REGISTRY
+
+- name: Download apache2-utils
+  apt:
+    name: apache2-utils
+    state: latest
+    update_cache: yes
+
+- name: Download registry repository
+  git:
+    repo: 'https://github.com/Projet-Automation-Infra-SI-Ynov/Registry.git'
+    dest: '{{ PATH }}'
+    version: master
+
+- name: Add Registry IP in daemon.json
+  shell: sed -i 's/IP_REGISTRY/REGISTRY2/g' /home/administrateur/registry/daemon.json
+
+- name: Add Registry IP in daemon.json
+  shell: sed -i 's/IP_REGISTRY/REGISTRY2/g' /home/administrateur/registry/docker-compose.yml
+
+- name: Deploy Docker Compose registry
+  docker_compose:
+    build: yes
+    project_src: /home/administrateur/registry
+    state: present
+
+- name: Copy the Docker daemon file
+  copy:
+    remote_src: yes
+    src: /home/administrateur/registry/daemon.json
+    dest: /etc/docker/daemon.json
+
+- name: Restart the Docker daemon
+  systemd:
+    name: docker
+    state: restarted
+    masked: no
+  #timeout: 60
+  async: 60
